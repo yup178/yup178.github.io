@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>webauthn test</title>
+  <style type="text/css">
+    h3 {
+      margin-top: 5px;
+      margin-bottom: 5px;
+      align-items: center;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root">
+    <button id="signinBtn">signIn</button>
+  </div>
+</body>
+
+<script>
+  document.getElementById('signinBtn').addEventListener('click', async () => {
+    const credential = await signIn();
+    console.log(credential);
+  });
+
+  async function signIn() {
+    const publicKey = {
+      challenge: new Uint8Array([123]),
+      allowCredentials: [],
+      userVerification: "preferred",
+    };
+
+    return await navigator.credentials.get({ publicKey });
+  }
+</script>
+
+</html>
